@@ -1,7 +1,2 @@
-# MyResume
-## Introduction
-1. Personal Resume
-2. Tst
-## Install
-
-## Bug Reportll
+# ThoughtWorks Pos App Backend
+this is our code's repo.
