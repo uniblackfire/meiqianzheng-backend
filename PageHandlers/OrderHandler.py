@@ -1,7 +1,7 @@
 import tornado.web
 
 
-class InputHandler(tornado.web.RequestHandler):
+class OrderHandler(tornado.web.RequestHandler):
     def post(self):
         # 返回数据
         aaaa = self.get_argument('productsinfo')

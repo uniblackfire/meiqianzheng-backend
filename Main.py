@@ -6,7 +6,7 @@ import tornado.web
 from tornado.options import define, options
 
 import Constants
-from PageHandlers.InputHandler import InputHandler
+from PageHandlers.OrderHandler import OrderHandler
 from PageHandlers.ProductListHandler import ProductListHandler
 
 define("port", default=Constants.get_site_port(), help="run on the given port", type=int)
@@ -16,7 +16,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [  # (?<=/)\w+
             (r"/products/(\w*)", ProductListHandler),
-            (r"/input", InputHandler)
+            (r"/order", OrderHandler)
         ]
 
         settings = dict(
