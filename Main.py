@@ -6,8 +6,10 @@ import tornado.web
 from tornado.options import define, options
 
 import Constants
-
+from PageHandlers.ProductInfoHandler import ProductInfoHandler
+from PageHandlers.InputHandler import InputHandler
 from PageHandlers.MainHandler import MainHandler
+from PageHandlers.ProductListHandler import ProductListHandler
 
 define("port", default=Constants.get_site_port(), help="run on the given port", type=int)
 
@@ -15,21 +17,23 @@ define("port", default=Constants.get_site_port(), help="run on the given port", 
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/?", MainHandler),
-
+            (r"/products/?", ProductListHandler),
+            (r"/products/([\w]+)", ProductInfoHandler),
+            (r"/input", InputHandler)
         ]
 
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             cookie_secret='ABCD0912bZJc2sWbQLKos4156GkHn/VB9oXwQt8S0R0kRvJ5/xJ89E=',
-            xsrf_cookies=True,
+            # xsrf_cookies=True,
             debug=Constants.DEBUG_ENABLED,
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
 if __name__ == "__main__":
+    print('server started...')
     Constants.init()
     # NOTE: start mongodb before run this web app
     tornado.options.parse_command_line()
