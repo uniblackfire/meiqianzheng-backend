@@ -1,17 +1,18 @@
 import unittest
 from unittest import mock
 
+from Controller import database
 
-class TddInPythonExample(unittest.TestCase):
+
+class databaseTest(unittest.TestCase):
     def setUp(self):
         print('setUp...')
 
     def tearDown(self):
         print('tearDown...')
 
-    def test_calculator_add_method_returns_correct_result(self):
-        result = 4
-        self.assertEqual(4, result)
+    def test_database_read_products_list(self):
+        self.assertIsNotNone(database.read_products_list_file())
 
 
 if __name__ == '__main__':

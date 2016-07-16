@@ -8,7 +8,6 @@ from tornado.options import define, options
 import Constants
 from PageHandlers.ProductInfoHandler import ProductInfoHandler
 from PageHandlers.InputHandler import InputHandler
-from PageHandlers.MainHandler import MainHandler
 from PageHandlers.ProductListHandler import ProductListHandler
 
 define("port", default=Constants.get_site_port(), help="run on the given port", type=int)

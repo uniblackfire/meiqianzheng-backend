@@ -1,10 +1,4 @@
 import os
-
-try:
-    import simplejson as json
-except:
-    import json
-
 DEBUG_ENABLED = True  # debug enabled
 
 
@@ -17,3 +11,6 @@ def get_site_port():
         return 8000
     else:
         return 80
+
+
+project_dir = os.path.dirname(os.path.abspath(__file__))

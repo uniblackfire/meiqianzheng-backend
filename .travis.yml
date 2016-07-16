@@ -5,4 +5,8 @@ python:
 install: "pip install -r requirements.txt"
 # command to run tests
 script: nosetests
-  #- python test/test.py
+  #- python test/databaseTest.py
+deploy:
+  provider: heroku
+  api_key: ...
+  app: twpos
