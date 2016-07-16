@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 
 from Controller.database import read_products_list_file
-from Controller.product_list import add_promotion_type_to_products_list
+from Controller.product_list import get_products_list
 
 
 class product_list_test(unittest.TestCase):
@@ -12,8 +12,8 @@ class product_list_test(unittest.TestCase):
     def tearDown(self):
         print('tearDown...')
 
-    def test_products_list_should_have_promotion_type(self):
-        pass
+    def test_get_products_list_output(self):
+        self.assertIs(type(get_products_list()), str)
         # self.assertIsNotNone(obj['promotionType'])
 
 
