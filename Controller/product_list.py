@@ -12,7 +12,7 @@ def get_promotion_type_by_barcode(barcode):
     result_list = list()
     for promotion_dict in promotion_list:
         if barcode in promotion_dict['barcodes']:
-            result_list.append(promotion_dict['name'])
+            result_list.append(promotion_dict['type'])
     return result_list
 
 
