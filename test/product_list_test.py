@@ -13,8 +13,7 @@ class product_list_test(unittest.TestCase):
         print('tearDown...')
 
     def test_get_products_list_output(self):
-        self.assertIs(type(get_products_list()), str)
-        # self.assertIsNotNone(obj['promotionType'])
+        self.assertIsNotNone(get_products_list())
 
 
 if __name__ == '__main__':

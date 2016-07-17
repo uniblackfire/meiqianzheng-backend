@@ -1,20 +1,24 @@
+
 try:
     import simplejson as json
 except:
     import json
-
-from Controller.database import read_products_list_file
+from Controller.database import read_products_list_file, read_promotion_list_file
 
 
 def get_promotion_type_by_barcode(barcode):
     # return a list to represent promotions!
-    return ['man3mian1', 'ceshiceshi']
+    promotion_list= read_promotion_list_file()
+    result_list = list()
+    for promotion_dict in promotion_list:
+        if barcode in promotion_dict['barcodes']:
+            result_list.append(promotion_dict['name'])
+    return result_list
 
 
 # json.dumps(items_list)
 def get_products_list(category_name=''):
-    data = read_products_list_file()
-    items_list = json.loads(data)
+    items_list = read_products_list_file()
     return_list = list()
     for item_dict in items_list:
         if len(category_name.strip()) == 0 or item_dict['categoryName'] == category_name:

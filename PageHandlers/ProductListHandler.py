@@ -1,5 +1,3 @@
-from urllib.parse import urlparse
-import urllib
 
 import tornado.web
 

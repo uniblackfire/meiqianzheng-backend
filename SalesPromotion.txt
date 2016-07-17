@@ -1,0 +1,19 @@
+[
+{
+	"name": "买二赠一商品",
+	"type": "BUY_TWO_GET_ONE_FREE",
+	"barcodes": [
+		"ITEM000005",
+		"ITEM000001",
+		"ITEM000002"
+	]
+},
+{
+	"name": "95折",
+	"type": "95_zhe",
+	"barcodes": [
+		"ITEM000003",
+		"ITEM000002"
+	]
+}
+]
