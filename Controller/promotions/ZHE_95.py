@@ -24,6 +24,7 @@ class ZHE_95(Promotion):
         self.product_name = product_name
         self.unit_name = unit_name
         self.saved_price = 0
+        self.new_price = original_price
 
     def get_new_items_price(self):
         '''
@@ -32,8 +33,9 @@ class ZHE_95(Promotion):
         '''
         super().get_new_items_price()
         self.saved_price = self.price * 0.05
-        self.price -= self.saved_price
-        return self.price
+        print(self.saved_price)
+        self.new_price -= self.saved_price
+        return self.new_price
 
     def get_promote_message(self):
         '''
@@ -49,5 +51,5 @@ class ZHE_95(Promotion):
                   self.items_num,
                   self.unit_name,
                   self.unit_price,
-                  self.get_new_items_price(),
+                  self.new_price,
                   self.saved_price)

@@ -22,6 +22,7 @@ class BuyTwoGetOneFree(Promotion):
         self.free_num = self.items_num // 3
         self.unit_price = unit_price
         self.price = original_price
+        self.new_price = original_price
         self.product_name = product_name
         self.unit_name = unit_name
 
@@ -32,8 +33,8 @@ class BuyTwoGetOneFree(Promotion):
         '''
         super().get_new_items_price()
         save_price = self.free_num * self.unit_price
-        self.price -= save_price
-        return self.price
+        self.new_price -= save_price
+        return self.new_price
 
     def get_promote_message(self):
         '''
@@ -49,4 +50,4 @@ class BuyTwoGetOneFree(Promotion):
                   self.items_num,
                   self.unit_name,
                   self.unit_price,
-                  self.get_new_items_price())
+                  self.new_price)
