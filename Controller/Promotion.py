@@ -16,6 +16,9 @@ class Promotion:
     def get_promote_message(self):
         pass
 
+    def get_basic_info(self):
+        pass
+
     @staticmethod
     def get_promotion_class(promotion_type,
                             product_name,
@@ -37,7 +40,6 @@ class Promotion:
         _packet_name = 'Controller.promotions.' + promotion_type
         promotion_module = __import__(_packet_name, fromlist=True)
         obj = getattr(promotion_module, promotion_type)
-        print(obj)
         return obj(
             product_name,
             original_price,

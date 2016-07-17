@@ -1,7 +1,7 @@
 [
 {
 	"name": "买二赠一商品",
-	"type": "BUY_TWO_GET_ONE_FREE",
+	"type": "BuyTwoGetOneFree",
 	"barcodes": [
 		"ITEM000005",
 		"ITEM000001",

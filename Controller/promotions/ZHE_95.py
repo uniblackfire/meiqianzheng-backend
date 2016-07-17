@@ -19,11 +19,11 @@ class ZHE_95(Promotion):
         '''
         super().__init__()
         self.items_num = items_num
-        self.free_num = self.items_num // 2
         self.unit_price = unit_price
         self.price = original_price
         self.product_name = product_name
         self.unit_name = unit_name
+        self.saved_price = 0
 
     def get_new_items_price(self):
         '''
@@ -31,8 +31,8 @@ class ZHE_95(Promotion):
         :return: 返回该种商品的新的总价
         '''
         super().get_new_items_price()
-        save_price = self.free_num * self.unit_price
-        self.price -= save_price
+        self.saved_price = self.price * 0.05
+        self.price -= self.saved_price
         return self.price
 
     def get_promote_message(self):
@@ -41,4 +41,13 @@ class ZHE_95(Promotion):
         :return: 生成优惠信息,准备输出到小票上
         '''
         super().get_promote_message()
-        return '名称：%s，数量：%d%s\n' % (self.product_name, self.free_num, self.unit_name)
+        return None  # '节省%.2f(元)\n' % (self.product_name, self.free_num, self.unit_name)
+
+    def get_basic_info(self):
+        return '名称：%s，数量：%d%s，单价：%.2f(元)，小计：%.2f(元)，节省%.2f(元)\n' \
+               % (self.product_name,
+                  self.items_num,
+                  self.unit_name,
+                  self.unit_price,
+                  self.get_new_items_price(),
+                  self.saved_price)

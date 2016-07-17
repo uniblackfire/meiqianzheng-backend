@@ -15,13 +15,13 @@ def order_process(post_data):
     # 输出小票
     # 基本的购物统计信息
     basic_info = ''
-    # 促销信息
-    promote_message = ''
+
     # 最后的总价格
     total_price = 0
     # 总共节省的金额
     total_save = 0
-
+    # 促销信息
+    promotion_msg_dict = dict()
     for barcode, number in customer_item_dict.items():
         # barcode表示每个商品的barcode
         # number表示每个商品的个数
@@ -33,41 +33,53 @@ def order_process(post_data):
         unit_name = get_product_info_by_barcode(barcode)['unit']
         # 每种商品优惠前的总价
         items_price = unit_price * number
+        promotion_list = get_promotions_list_type_by_barcode(barcode)
+        if promotion_list:
+            for promotion in promotion_list:
+                # 反射调用对应于promotion['type']的促销逻辑类
+                promotion_instance = Promotion.get_promotion_class(
+                    promotion,
+                    product_name,
+                    items_price,
+                    number,
+                    unit_price,
+                    unit_name)
 
-        for promotion in get_promotions_list_type_by_barcode(barcode):
-            # 反射调用对应于promotion['type']的促销逻辑类
-            print(promotion)
-            promotion_instance = Promotion.get_promotion_class(
-                promotion,
-                product_name,
-                items_price,
-                number,
-                unit_price,
-                unit_name)
-            # 促销活动名称
-            promotion_name = get_promotion_name_by_type(promotion)
-            # 每种参加优惠活动的商品的信息
-            promote_message += promotion_instance.get_promote_message()
-            tmp_items_price = items_price
-            # 每种商品优惠后的总价
-            items_price = promotion_instance.get_new_items_price()
-            # 累计总共优惠的金额
-            total_save += tmp_items_price - items_price
-        basic_info += '名称：%s，数量：%d%s，单价：%.2f(元)，小计：%.2f(元)\n' \
-                      % (product_name, number, unit_name, unit_price, items_price)
+                # 促销活动名称
+                promotion_name = get_promotion_name_by_type(promotion)
+
+                # 每种参加优惠活动的商品的信息
+                promot_msg = promotion_instance.get_promote_message()
+
+                if promot_msg:
+                    if promotion_name not in promotion_msg_dict.keys():
+                        promotion_msg_dict.setdefault(promotion_name, '')
+
+                    promotion_msg_dict[promotion_name] += promot_msg
+
+                tmp_items_price = items_price
+                # 每种商品优惠后的总价
+                items_price = promotion_instance.get_new_items_price()
+                # 累计总共优惠的金额
+                total_save += tmp_items_price - items_price
+                basic_info += promotion_instance.get_basic_info()
+        else:
+            basic_info += '名称：%s，数量：%d%s，单价：%.2f(元)，小计：%.2f(元)\n' \
+                          % (product_name, number, unit_name, unit_price, items_price)
         total_price += items_price
 
     output_message = '***<没钱赚商店>购物清单***\n'
     output_message += '%s' % basic_info
     output_message += LINE_BREAK
-    if promote_message:
-        output_message += promotion_name + '：\n'
-        output_message += promote_message
-        output_message += LINE_BREAK
-        output_message += '总计：%.2f(元)\n节省：%.2f(元)\n' % (total_price, total_save)
-    else:
-        output_message += '总计：%.2f(元)\n' % total_price
-    output_message += '**********************'
+    if promotion_msg_dict:
+        for k, v in promotion_msg_dict.items():
+            output_message += k + '：\n'  # get_promotion_name_by_type(promotion)
+            output_message += v
+            output_message += LINE_BREAK
+            output_message += '总计：%.2f(元)\n' % total_price
+    if total_save:
+        output_message += '节省：%.2f(元)\n' % total_save
+    output_message += '**********************\n'
     # 返回小票信息
     return output_message
 

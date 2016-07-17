@@ -1,7 +1,7 @@
 from Controller.Promotion import Promotion
 
 
-class BUY_TWO_GET_ONE_FREE(Promotion):
+class BuyTwoGetOneFree(Promotion):
     def __init__(self,
                  product_name,
                  original_price,
@@ -19,7 +19,7 @@ class BUY_TWO_GET_ONE_FREE(Promotion):
         '''
         super().__init__()
         self.items_num = items_num
-        self.free_num = self.items_num // 2
+        self.free_num = self.items_num // 3
         self.unit_price = unit_price
         self.price = original_price
         self.product_name = product_name
@@ -42,3 +42,11 @@ class BUY_TWO_GET_ONE_FREE(Promotion):
         '''
         super().get_promote_message()
         return '名称：%s，数量：%d%s\n' % (self.product_name, self.free_num, self.unit_name)
+
+    def get_basic_info(self):
+        return '名称：%s，数量：%d%s，单价：%.2f(元)，小计：%.2f(元)\n' \
+               % (self.product_name,
+                  self.items_num,
+                  self.unit_name,
+                  self.unit_price,
+                  self.get_new_items_price())
