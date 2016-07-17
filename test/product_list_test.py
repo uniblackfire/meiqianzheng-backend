@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 
 from Controller.database import read_products_list_file
-from Controller.product_list import get_products_list, get_product_info_by_barcode
+from Controller.product_list import get_products_list, get_product_info_by_barcode, get_promotion_name_by_type
 
 
 class product_list_test(unittest.TestCase):
@@ -21,6 +21,11 @@ class product_list_test(unittest.TestCase):
         item_dict = get_product_info_by_barcode('ITEM000005')
         self.assertEqual(item_dict['barcode'], 'ITEM000005')
 
+    def test_get_promotion_name_by_type(self):
+        result = get_promotion_name_by_type('BUY_TWO_GET_ONE_FREE')
+        self.assertEqual(result, '买二赠一商品')
+        result = get_promotion_name_by_type('95_ZHE')
+        self.assertEqual(result, '95折')
 
 if __name__ == '__main__':
     unittest.main()

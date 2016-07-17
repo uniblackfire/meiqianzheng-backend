@@ -15,7 +15,7 @@ def get_product_info_by_barcode(barcode):
 
 
 # 根据barcode返回该商品参加的优惠活动
-def get_promotion_type_by_barcode(barcode):
+def get_promotions_list_type_by_barcode(barcode):
     # return a list to represent promotions!
     promotion_list = read_promotion_list_file()
     result_list = list()
@@ -25,6 +25,14 @@ def get_promotion_type_by_barcode(barcode):
     return result_list
 
 
+def get_promotion_name_by_type(promotion_type):
+    promotion_list = read_promotion_list_file()
+    for item in promotion_list:
+        if promotion_type == item['type']:
+            return item['name']
+    return None
+
+
 # json.dumps(items_list)
 def get_products_list(category_name=''):
     items_list = read_products_list_file()
@@ -32,5 +40,5 @@ def get_products_list(category_name=''):
     for item_dict in items_list:
         if len(category_name.strip()) == 0 or item_dict['categoryName'] == category_name:
             return_list.append(item_dict)
-        item_dict['promotionType'] = get_promotion_type_by_barcode(item_dict['barcode'])
+        item_dict['promotionType'] = get_promotions_list_type_by_barcode(item_dict['barcode'])
     return json.dumps(return_list)

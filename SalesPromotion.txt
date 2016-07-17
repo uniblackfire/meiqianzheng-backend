@@ -10,7 +10,7 @@
 },
 {
 	"name": "95折",
-	"type": "95_ZHE",
+	"type": "ZHE_95",
 	"barcodes": [
 		"ITEM000003",
 		"ITEM000002"
