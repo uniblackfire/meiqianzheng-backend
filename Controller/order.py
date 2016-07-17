@@ -1,12 +1,28 @@
 import collections
-import json
 import re
+
+from Controller.product_list import get_promotion_type_by_barcode
 
 
 def order_process(post_data):
-    items_dict = get_items_dict(post_data)
-    print(items_dict)
+    customer_item_dict = get_items_dict(post_data)
+    # Promotion.get_promotion_class('BUY_TWO_GET_ONE_FREE', '', '', 1, '', '')
+
+    for barcode, number in customer_item_dict.items():
+        # barcode表示每个商品的barcode
+        # number表示每个商品的个数
+        # 单价
+        unit_price = get_promotion_type_by_barcode(barcode)['price']
+        # 商品名称
+        product_name = get_promotion_type_by_barcode(barcode)['name']
+        # 计量单位名称
+        unit_name = get_promotion_type_by_barcode(barcode)['unit']
+        # 每种商品优惠前的总价
+        items_price = unit_price * number
+
+    # 返回小票信息
     return 'ok'
+
 
 def get_items_dict(items_string):
     '''

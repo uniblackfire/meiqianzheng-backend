@@ -13,4 +13,4 @@ def get_site_port():
         return 80
 
 
-project_dir = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))

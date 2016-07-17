@@ -1,14 +1,23 @@
-
 try:
     import simplejson as json
 except:
     import json
 from Controller.database import read_products_list_file, read_promotion_list_file
 
+
+# 根据barcode返回该商品的具体信息
+def get_product_info_by_barcode(barcode):
+    items_list = read_products_list_file()
+    for item_dict in items_list:
+        if item_dict['barcode'] == barcode:
+            return item_dict
+    return None
+
+
 # 根据barcode返回该商品参加的优惠活动
 def get_promotion_type_by_barcode(barcode):
     # return a list to represent promotions!
-    promotion_list= read_promotion_list_file()
+    promotion_list = read_promotion_list_file()
     result_list = list()
     for promotion_dict in promotion_list:
         if barcode in promotion_dict['barcodes']:

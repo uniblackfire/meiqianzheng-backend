@@ -2,18 +2,24 @@ import unittest
 from unittest import mock
 
 from Controller.database import read_products_list_file
-from Controller.product_list import get_products_list
+from Controller.product_list import get_products_list, get_product_info_by_barcode
 
 
 class product_list_test(unittest.TestCase):
     def setUp(self):
-        print('setUp...')
+        # print('setUp...')
+        pass
 
     def tearDown(self):
-        print('tearDown...')
+        # print('tearDown...')
+        pass
 
     def test_get_products_list_output(self):
         self.assertIsNotNone(get_products_list())
+
+    def test_get_product_info_by_barcode(self):
+        item_dict = get_product_info_by_barcode('ITEM000005')
+        self.assertEqual(item_dict['barcode'], 'ITEM000005')
 
 
 if __name__ == '__main__':
