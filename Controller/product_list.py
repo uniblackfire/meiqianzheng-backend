@@ -5,7 +5,7 @@ except:
     import json
 from Controller.database import read_products_list_file, read_promotion_list_file
 
-
+# 根据barcode返回该商品参加的优惠活动
 def get_promotion_type_by_barcode(barcode):
     # return a list to represent promotions!
     promotion_list= read_promotion_list_file()
