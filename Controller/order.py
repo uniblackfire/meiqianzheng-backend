@@ -3,6 +3,11 @@ import json
 import re
 
 
+def order_process(post_data):
+    items_dict = get_items_dict(post_data)
+    print(items_dict)
+    return 'ok'
+
 def get_items_dict(items_string):
     '''
     处理购物信息,并转化为字典形式
