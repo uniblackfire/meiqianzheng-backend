@@ -10,8 +10,9 @@ LINE_BREAK = '----------------------\n'
 
 
 def order_process(post_data):
+    print(post_data)
     customer_item_dict = get_items_dict(post_data)
-
+    print(customer_item_dict)
     # 输出小票
     # 基本的购物统计信息
     basic_info = ''
@@ -49,7 +50,7 @@ def order_process(post_data):
                     unit_name)
                 new_items_price = promotion_instance.get_new_items_price()
                 new_price_list.append(new_items_price)
-
+            # 查找到优惠额度最大的优惠活动 然后提取该优惠活动的信息
             cheapest_promotion = promotion_list[new_price_list.index(min(new_price_list))]
             promotion_instance = Promotion.get_promotion_class(
                 cheapest_promotion,
@@ -67,7 +68,6 @@ def order_process(post_data):
             if promot_msg:
                 if promotion_name not in promotion_msg_dict.keys():
                     promotion_msg_dict.setdefault(promotion_name, '')
-
                 promotion_msg_dict[promotion_name] += promot_msg
 
             tmp_items_price = items_price
@@ -114,7 +114,7 @@ def get_items_dict(items_string):
     for item in items_list:
         items_dict[item] += 1
 
-    pattern = re.compile(r"(?<=\')ITEM\d+-\d(?=\')", re.IGNORECASE)
+    pattern = re.compile(r"(?<=\')ITEM\d+-\d+(?=\')", re.IGNORECASE)
     multi_items = re.findall(pattern, items_string)
     for item in multi_items:
         item_splited = item.split('-')
