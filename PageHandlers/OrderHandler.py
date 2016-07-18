@@ -8,4 +8,5 @@ class OrderHandler(tornado.web.RequestHandler):
         # 返回数据
         order_info = self.get_argument('order')
         result = order_process(order_info)
+        self.set_header('content-type', 'application/json')
         self.write(result)

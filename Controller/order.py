@@ -1,5 +1,6 @@
 import collections
 import re
+import json
 
 from Controller.Promotion import Promotion
 from Controller.product_list import get_promotions_list_type_by_barcode, get_product_info_by_barcode, \
@@ -94,7 +95,10 @@ def order_process(post_data):
         output_message += '节省：%.2f(元)\n' % total_save
     output_message += '**********************\n'
     # 返回小票信息
-    return output_message
+
+
+
+    return json.dumps({'output': output_message})  # output_message
 
 
 def get_items_dict(items_string):
