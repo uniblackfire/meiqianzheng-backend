@@ -9,7 +9,7 @@ class ZHE_95(Promotion):
                  unit_price,
                  unit_name):
         '''
-        买三免一的优惠活动的逻辑
+        优惠活动的逻辑
         :param product_name: 商品名称
         :param original_price: 优惠前该种商品的总价
         :param items_num: 该商品的个数
@@ -41,7 +41,7 @@ class ZHE_95(Promotion):
         :return: 生成优惠信息,准备输出到小票上
         '''
         super().get_promote_message()
-        return None  # '节省%.2f(元)\n' % (self.product_name, self.free_num, self.unit_name)
+        return None
 
     def get_basic_info(self):
         return '名称：%s，数量：%d%s，单价：%.2f(元)，小计：%.2f(元)，节省%.2f(元)\n' \

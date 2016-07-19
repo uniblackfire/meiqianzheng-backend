@@ -12,10 +12,9 @@ LINE_BREAK = '----------------------\n'
 
 def order_process(post_data):
     customer_item_dict = get_items_dict(post_data)
-    # 输出小票
+
     # 基本的购物统计信息
     basic_info = ''
-
     # 最后的总价格
     total_price = 0
     # 总共节省的金额
@@ -82,8 +81,7 @@ def order_process(post_data):
 
     # 返回小票信息
     output_message = gen_output_message(basic_info, promotion_msg_dict, total_price, total_save)
-    json_str = json.dumps({'output': output_message})
-    return json_str
+    return json.dumps({'output': output_message})
 
 
 def gen_output_message(basic_info, promotion_msg_dict, total_price, total_save):
@@ -94,8 +92,8 @@ def gen_output_message(basic_info, promotion_msg_dict, total_price, total_save):
     output_message += '%s' % basic_info
     output_message += LINE_BREAK
     if promotion_msg_dict:
-        for k, v in promotion_msg_dict.items():
-            output_message += k + '：\n'  # get_promotion_name_by_type(promotion)
+        for k, v in promotion_msg_dict.items():  # k 为优惠活动名称, v 为对应的优惠信息
+            output_message += k + '：\n'
             output_message += v
             output_message += LINE_BREAK
             output_message += '总计：%.2f(元)\n' % total_price

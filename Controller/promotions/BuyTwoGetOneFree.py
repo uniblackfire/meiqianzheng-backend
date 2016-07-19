@@ -42,6 +42,8 @@ class BuyTwoGetOneFree(Promotion):
         :return: 生成优惠信息,准备输出到小票上
         '''
         super().get_promote_message()
+        if self.free_num == 0:
+            return None
         return '名称：%s，数量：%d%s\n' % (self.product_name, self.free_num, self.unit_name)
 
     def get_basic_info(self):
