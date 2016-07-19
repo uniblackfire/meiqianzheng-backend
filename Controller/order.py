@@ -11,9 +11,7 @@ LINE_BREAK = '----------------------\n'
 
 
 def order_process(post_data):
-    print(post_data)
     customer_item_dict = get_items_dict(post_data)
-    print(customer_item_dict)
     # 输出小票
     # 基本的购物统计信息
     basic_info = ''
@@ -36,10 +34,12 @@ def order_process(post_data):
         unit_name = get_product_info_by_barcode(barcode)['unit']
         # 每种商品优惠前的总价
         items_price = unit_price * number
+        # 把包含该barcode的所有优惠活动读取到
         promotion_list = get_promotions_list_type_by_barcode(barcode)
         new_price_list = list()
 
         if promotion_list:
+            # 假设一个商品只能参加一种优惠,遍历所有优惠,记录优惠后的价格
             for promotion in promotion_list:
                 # 反射调用对应于promotion['type']的促销逻辑类
                 promotion_instance = Promotion.get_promotion_class(
@@ -53,20 +53,18 @@ def order_process(post_data):
                 new_price_list.append(new_items_price)
             # 查找到优惠额度最大的优惠活动 然后提取该优惠活动的信息
             cheapest_promotion = promotion_list[new_price_list.index(min(new_price_list))]
-            promotion_instance = Promotion.get_promotion_class(
-                cheapest_promotion,
-                product_name,
-                items_price,
-                number,
-                unit_price,
-                unit_name)
+            promotion_instance = Promotion.get_promotion_class(cheapest_promotion,
+                                                               product_name,
+                                                               items_price,
+                                                               number,
+                                                               unit_price,
+                                                               unit_name)
             # 促销活动名称
             promotion_name = get_promotion_name_by_type(cheapest_promotion)
 
             # 每种参加优惠活动的商品的信息
             promot_msg = promotion_instance.get_promote_message()
-
-            if promot_msg:
+            if promot_msg:  # 根据优惠活动,把属于该优惠的所有优惠信息放进去
                 if promotion_name not in promotion_msg_dict.keys():
                     promotion_msg_dict.setdefault(promotion_name, '')
                 promotion_msg_dict[promotion_name] += promot_msg
@@ -82,6 +80,16 @@ def order_process(post_data):
                           % (product_name, number, unit_name, unit_price, items_price)
         total_price += items_price
 
+    # 返回小票信息
+    output_message = gen_output_message(basic_info, promotion_msg_dict, total_price, total_save)
+    json_str = json.dumps({'output': output_message})
+    return json_str
+
+
+def gen_output_message(basic_info, promotion_msg_dict, total_price, total_save):
+    '''
+    生成输出的小票信息
+    '''
     output_message = '***<没钱赚商店>购物清单***\n'
     output_message += '%s' % basic_info
     output_message += LINE_BREAK
@@ -94,11 +102,7 @@ def order_process(post_data):
     if total_save:
         output_message += '节省：%.2f(元)\n' % total_save
     output_message += '**********************\n'
-    # 返回小票信息
-
-
-
-    return json.dumps({'output': output_message})  # output_message
+    return output_message
 
 
 def get_items_dict(items_string):

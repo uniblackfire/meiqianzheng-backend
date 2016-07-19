@@ -31,9 +31,7 @@ class ZHE_95(Promotion):
 
         :return: 返回该种商品的新的总价
         '''
-        super().get_new_items_price()
         self.saved_price = self.price * 0.05
-        print(self.saved_price)
         self.new_price -= self.saved_price
         return self.new_price
 

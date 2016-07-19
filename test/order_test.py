@@ -1,6 +1,6 @@
 import unittest
 from unittest import mock
-
+import json
 from Controller.database import read_products_list_file
 from Controller.order import get_items_dict, order_process
 from Controller.product_list import get_products_list
@@ -72,8 +72,8 @@ class order_test(unittest.TestCase):
 
 
                 '''
-        result = order_process(input_data)
-        self.assertIsNotNone(result)
+        result = json.loads(order_process(input_data))
+        self.assertIsInstance(result, dict)
 
 if __name__ == '__main__':
     unittest.main()
