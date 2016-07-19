@@ -36,6 +36,15 @@
   "price": 3.0
 },
 {
+  "barcode": "ITEM000006",
+  "name": "桔子",
+  "unit": "斤",
+  "categoryName": "food",
+  "category": "食品",
+  "subCategory": "水果",
+  "price": 5.0
+},
+{
   "barcode": "ITEM000004",
   "name": "芒果",
   "unit": "斤",
@@ -43,5 +52,23 @@
   "category": "食品",
   "subCategory": "水果",
   "price": 8.0
+},
+{
+  "barcode": "ITEM000007",
+  "name": "篮球",
+  "unit": "个",
+  "categoryName": "sport",
+  "category": "体育",
+  "subCategory": "器材",
+  "price": 50.00
+},
+{
+  "barcode": "ITEM000008",
+  "name": "网球",
+  "unit": "个",
+  "categoryName": "sport",
+  "category": "体育",
+  "subCategory": "器材",
+  "price": 10.00
 }
 ]
