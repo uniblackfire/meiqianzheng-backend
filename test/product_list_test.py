@@ -22,7 +22,7 @@ class product_list_test(unittest.TestCase):
     def test_get_promotion_name_by_type(self):
         result = get_promotion_name_by_type('BuyTwoGetOneFree')
         self.assertEqual(result, '买二赠一商品')
-        result = get_promotion_name_by_type('ZHE_95')
+        result = get_promotion_name_by_type('Zhe95')
         self.assertEqual(result, '95折')
 
 if __name__ == '__main__':

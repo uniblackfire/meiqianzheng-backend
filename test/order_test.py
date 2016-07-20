@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from Controller.order import get_items_dict, order_process
+from src.Controller.order import get_items_dict, order_process
 
 
 class order_test(unittest.TestCase):
