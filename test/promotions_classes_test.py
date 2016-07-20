@@ -1,10 +1,6 @@
 import unittest
-from unittest import mock
 
-from Controller.Promotion import Promotion
-from Controller.database import read_products_list_file
-from Controller.order import get_items_dict, order_process
-from Controller.product_list import get_products_list
+from src.Controller.Promotion import Promotion
 
 
 class order_test(unittest.TestCase):

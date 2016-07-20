@@ -1,9 +1,7 @@
-import unittest
-from unittest import mock
 import json
-from Controller.database import read_products_list_file
+import unittest
+
 from Controller.order import get_items_dict, order_process
-from Controller.product_list import get_products_list
 
 
 class order_test(unittest.TestCase):

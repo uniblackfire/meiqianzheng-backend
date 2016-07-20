@@ -1,8 +1,6 @@
 import unittest
-from unittest import mock
 
-from Controller.database import read_products_list_file
-from Controller.product_list import get_products_list, get_product_info_by_barcode, get_promotion_name_by_type
+from src.Controller.product_list import get_products_list, get_product_info_by_barcode, get_promotion_name_by_type
 
 
 class product_list_test(unittest.TestCase):

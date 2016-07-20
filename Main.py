@@ -1,4 +1,5 @@
 import os
+
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
@@ -6,8 +7,8 @@ import tornado.web
 from tornado.options import define, options
 
 import Constants
-from PageHandlers.OrderHandler import OrderHandler
-from PageHandlers.ProductListHandler import ProductListHandler
+from src.PageHandlers.OrderHandler import OrderHandler
+from src.PageHandlers.ProductListHandler import ProductListHandler
 
 define("port", default=Constants.get_site_port(), help="run on the given port", type=int)
 

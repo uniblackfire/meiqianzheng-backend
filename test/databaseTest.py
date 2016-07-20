@@ -1,7 +1,6 @@
 import unittest
-from unittest import mock
 
-from Controller import database
+from src.Controller import database
 
 
 class databaseTest(unittest.TestCase):
