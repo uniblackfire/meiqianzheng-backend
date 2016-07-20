@@ -11,6 +11,9 @@ LINE_BREAK = '----------------------\n'
 
 
 def order_process(post_data):
+    '''
+    处理订单的主要方法
+    '''
     customer_item_dict = get_items_dict(post_data)
 
     # 基本的购物统计信息

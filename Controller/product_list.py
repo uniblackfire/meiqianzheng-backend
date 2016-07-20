@@ -25,6 +25,7 @@ def get_promotions_list_type_by_barcode(barcode):
     return result_list
 
 
+# 根据促销活动的type英文名称查找中文名称
 def get_promotion_name_by_type(promotion_type):
     promotion_list = read_promotion_list_file()
     for item in promotion_list:
@@ -33,7 +34,7 @@ def get_promotion_name_by_type(promotion_type):
     return None
 
 
-# json.dumps(items_list)
+# 获取商品列表信息
 def get_products_list(category_name=''):
     items_list = read_products_list_file()
     return_list = list()
