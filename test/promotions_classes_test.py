@@ -20,9 +20,9 @@ class order_test(unittest.TestCase):
     def test_get_new_items_price_coke(self):
         self.assertEqual(self.promotion_instance.get_new_items_price(), 6.0)
 
-    def test_get_new_items_price_badminton_in_BuyTwoGetOneFree(self):
+    def test_get_new_items_price_badminton_in_BUY_TWO_GET_ONE_FREE(self):
         badminton_promotion_instance = Promotion.get_promotion_class(
-            'BuyTwoGetOneFree',
+            'BUY_TWO_GET_ONE_FREE',
             '羽毛球',
             6.0,
             6,
@@ -30,7 +30,7 @@ class order_test(unittest.TestCase):
             '个')
         self.assertEqual(badminton_promotion_instance.get_new_items_price(), 4.0)
 
-    def test_get_new_items_price_badminton_in_ZHE95(self):
+    def test_get_new_items_price_badminton_in_ZHE_95(self):
         banana_promotion_instance = Promotion.get_promotion_class(
             'Zhe95',
             '羽毛球',
