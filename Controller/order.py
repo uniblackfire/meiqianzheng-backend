@@ -25,8 +25,7 @@ def order_process(post_data):
     # 促销信息
     promotion_msg_dict = dict()
     for barcode, number in customer_item_dict.items():
-        # barcode表示每个商品的barcode
-        # number表示每个商品的个数
+        # barcode表示每个商品的barcode, number表示每个商品的个数
 
         # 单价
         unit_price = get_product_info_by_barcode(barcode)['price']
@@ -36,7 +35,7 @@ def order_process(post_data):
         unit_name = get_product_info_by_barcode(barcode)['unit']
         # 每种商品优惠前的总价
         items_price = unit_price * number
-        # 把包含该barcode的所有优惠活动读取到
+        # 把包含该barcode的所有优惠活动读取到promotion_list
         promotion_list = get_promotions_list_type_by_barcode(barcode)
         new_price_list = list()
 
@@ -53,8 +52,9 @@ def order_process(post_data):
                     unit_name)
                 new_items_price = promotion_instance.get_new_items_price()
                 new_price_list.append(new_items_price)
-            # 查找到优惠额度最大的优惠活动 然后提取该优惠活动的信息
+            # 查找到优惠额度最大的优惠活动
             cheapest_promotion = promotion_list[new_price_list.index(min(new_price_list))]
+            # 提取具有最大优惠幅度的优惠活动的信息
             promotion_instance = Promotion.get_promotion_class(cheapest_promotion,
                                                                product_name,
                                                                items_price,
