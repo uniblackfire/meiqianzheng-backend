@@ -1,5 +1,6 @@
 import os
-DEBUG_ENABLED = True  # debug enabled
+
+DEBUG_ENABLED = False  # debug enabled
 
 
 def init():
