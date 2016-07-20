@@ -9,7 +9,7 @@ python Main.py
 serve at:
 
 ```
-http://localhost
+[http://localhost](http://localhost)
 
-https://meiqianzheng.herokuapp.com/products/
+[https://meiqianzheng.herokuapp.com/products/](https://meiqianzheng.herokuapp.com/products/)
 ```
