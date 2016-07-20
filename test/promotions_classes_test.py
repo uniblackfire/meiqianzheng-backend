@@ -6,7 +6,7 @@ from src.Controller.Promotion import Promotion
 class order_test(unittest.TestCase):
     def setUp(self):
         self.promotion_instance = Promotion.get_promotion_class(
-            'BuyTwoGetOneFree',
+            'BUY_TWO_GET_ONE_FREE',
             '可口可乐',
             9.0,
             3,

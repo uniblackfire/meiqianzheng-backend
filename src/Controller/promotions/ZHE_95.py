@@ -1,7 +1,7 @@
 from src.Controller.Promotion import Promotion
 
 
-class Zhe95(Promotion):
+class ZHE_95(Promotion):
     def __init__(self,
                  product_name,
                  original_price,
