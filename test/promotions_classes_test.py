@@ -32,7 +32,7 @@ class order_test(unittest.TestCase):
 
     def test_get_new_items_price_badminton_in_ZHE_95(self):
         banana_promotion_instance = Promotion.get_promotion_class(
-            'Zhe95',
+            'ZHE_95',
             '羽毛球',
             3.0,
             1,
