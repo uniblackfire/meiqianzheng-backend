@@ -40,7 +40,7 @@ def order_process(post_data):
         promotion_list = get_promotions_list_type_by_barcode(barcode)
 
         if promotion_list:
-            cheapest_promotion = get_cheapest_promotion(promotion_list, items_price, number, unit_price)
+            cheapest_promotion = get_cheapest_promotion(promotion_list, number, unit_price)
             # 提取具有最大优惠幅度的优惠活动的信息
             promotion_instance = Promotion.get_promotion_class(cheapest_promotion,
                                                                product_name,
@@ -93,7 +93,7 @@ def gen_output_message(basic_info, promotion_msg_dict, total_price, total_save):
     return output_message
 
 
-def get_cheapest_promotion(promotion_list, items_price, number, unit_price):
+def get_cheapest_promotion(promotion_list, number, unit_price):
     new_price_list = list()
     # 假设一个商品只能参加一种优惠,遍历所有优惠,记录优惠后的价格
     for promotion in promotion_list:
@@ -101,7 +101,7 @@ def get_cheapest_promotion(promotion_list, items_price, number, unit_price):
         promotion_instance = Promotion.get_promotion_class(
             promotion,
             '',
-            items_price,
+            number * unit_price,
             number,
             unit_price,
             '')
