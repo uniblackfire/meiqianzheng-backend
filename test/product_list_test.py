@@ -20,9 +20,9 @@ class product_list_test(unittest.TestCase):
         self.assertEqual(item_dict['barcode'], 'ITEM000005')
 
     def test_get_promotion_name_by_type(self):
-        result = get_promotion_name_by_type('BuyTwoGetOneFree')
+        result = get_promotion_name_by_type('BUY_TWO_GET_ONE_FREE')
         self.assertEqual(result, '买二赠一商品')
-        result = get_promotion_name_by_type('Zhe95')
+        result = get_promotion_name_by_type('ZHE_95')
         self.assertEqual(result, '95折')
 
 if __name__ == '__main__':

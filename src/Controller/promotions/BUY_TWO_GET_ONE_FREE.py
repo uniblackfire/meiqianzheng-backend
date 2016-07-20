@@ -1,7 +1,7 @@
 from src.Controller.Promotion import Promotion
 
 
-class BuyTwoGetOneFree(Promotion):
+class BUY_TWO_GET_ONE_FREE(Promotion):
     def __init__(self,
                  product_name,
                  original_price,
